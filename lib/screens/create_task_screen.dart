@@ -19,14 +19,14 @@ class CreateTaskScreen extends StatelessWidget {
           children: [
             const CommonTextField(title: 'Task title',hintText:'Task title',),
             const Gap(16),
-            const Row(
+            Row(
               children: [
                 Expanded(
-                  child: CommonTextField(title: 'Date',hintText:'Aug, 07'),
+                  child: CommonTextField(title: 'Date',hintText:'Aug, 07',suffixIcon: IconButton(onPressed: (){}, icon: const Icon(Icons.calendar_month_rounded)),),
                 ),
-                Gap(16),
-                 Expanded(
-                  child: CommonTextField(title: 'Time',hintText:'10:30'),
+                const Gap(16),
+                Expanded(
+                  child: CommonTextField(title: 'Time',hintText:'10:30', suffixIcon: IconButton(onPressed: (){}, icon: const Icon(Icons.access_time)),),
                 ),
               ],
             ),
