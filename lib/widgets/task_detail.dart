@@ -15,7 +15,13 @@ class TaskDetail extends StatelessWidget {
       child: Column(
         children: [
           Center(
-            child: CircleContainer(task: task),
+            child: CircleContainer(
+              color: task.taskCategory.color.withOpacity(0.3),
+              child: Icon(
+                task.taskCategory.icon,
+                color: task.taskCategory.color.withOpacity(0.5),
+              ),
+            ),
           ),
           Text(
             task.title,

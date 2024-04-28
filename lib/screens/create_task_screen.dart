@@ -19,6 +19,8 @@ class CreateTaskScreen extends StatelessWidget {
           children: [
             const CommonTextField(title: 'Task title',hintText:'Task title',),
             const Gap(16),
+            const SelectCategory(),
+            const Gap(16),
             const SelectDateTime(),
             const Gap(16),
             const CommonTextField(title: 'Task note',hintText:'Task note',maxLine: 6,),
