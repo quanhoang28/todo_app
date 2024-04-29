@@ -1,7 +1,11 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+
+import 'package:todo_app/utils/task_keys.dart';
+
 import '../../utils/utils.dart';
 
-class Task extends Equatable{
+class Task extends Equatable {
   final int? id;
   final String title;
   final String note;
@@ -23,5 +27,51 @@ class Task extends Equatable{
       taskCategory,
       isCompleted,
     ];
+  }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      TaskKeys.id: id,
+      TaskKeys.title: title,
+      TaskKeys.note: note,
+      TaskKeys.time: time,
+      TaskKeys.date: date,
+      TaskKeys.category: taskCategory.name,
+      TaskKeys.isCompleted: isCompleted?1:0,
+    };
+  }
+
+  factory Task.fromJson(Map<String, dynamic> map) {
+    return Task(
+      id: map[TaskKeys.id],
+      title: map[TaskKeys.title],
+      note: map[TaskKeys.note],
+      time: map[TaskKeys.time],
+      date: map[TaskKeys.date],
+      taskCategory: TaskCategory.stringToCategory(map[TaskKeys.category]),
+      isCompleted: map[TaskKeys.isCompleted]==1?true:false,
+    );
+  }
+
+
+
+  Task copyWith({
+    int? id,
+    String? title,
+    String? note,
+    String? time,
+    String? date,
+    TaskCategory? taskCategory,
+    bool? isCompleted,
+  }) {
+    return Task(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      note: note ?? this.note,
+      time: time ?? this.time,
+      date: date ?? this.date,
+      taskCategory: taskCategory ?? this.taskCategory,
+      isCompleted: isCompleted ?? this.isCompleted,
+    );
   }
 }
