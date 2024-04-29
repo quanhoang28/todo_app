@@ -17,7 +17,13 @@ class TaskTitle extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
-              CircleContainer(task: task),
+              CircleContainer(
+              color: task.taskCategory.color.withOpacity(0.3),
+              child: Icon(
+                  task.taskCategory.icon,
+                  color: task.taskCategory.color.withOpacity(0.5),
+                ),
+              ),
               const Gap(16),
               Expanded(
                 child: Column(

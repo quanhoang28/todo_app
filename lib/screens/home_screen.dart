@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:todo_app/config/config.dart';
 import 'package:todo_app/data/data.dart';
+import '../providers/providers.dart';
 import '../utils/utils.dart';
 import '../widgets/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   static HomeScreen builder(BuildContext context,GoRouterState state)=>const HomeScreen();
   const HomeScreen({super.key});
   
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     final colors=context.colorScheme;
     final deviceSize=context.deviecSize;
+    final taskState=ref.watch(taskProvider);
 
     return Scaffold(
       body: Stack(
@@ -45,23 +48,14 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const DisplayTasksList(
-                    tasks: [
-                      Task(title: 'title1', note: 'note', time: '10:14', date: 'Aug, 07', taskCategory: TaskCategory.education,isCompleted: false),
-                      Task(title: 'title2', note: 'note2', time: '10:16', date: 'Aug, 07', taskCategory: TaskCategory.health,isCompleted: false),
-                      Task(title: 'title3', note: 'note', time: '10:14', date: 'Aug, 07', taskCategory: TaskCategory.work,isCompleted: false),
-                      Task(title: 'title4', note: 'note2', time: '10:16', date: 'Aug, 07', taskCategory: TaskCategory.social,isCompleted: false)
-                    ], 
+                  DisplayTasksList(
+                    tasks: taskState.tasks,
                   ),
                   const Gap(20),
                   Text('Completed',style: context.textTheme.headlineMedium,),
                   const Gap(20),
-                  const DisplayTasksList(
-                    tasks: [
-                      Task(title: 'title3', note: 'note', time: '10:14', date: 'Aug, 07', taskCategory: TaskCategory.education,isCompleted: true),
-                      Task(title: 'title4', note: 'note2', time: '10:16', date: 'Aug, 07', taskCategory: TaskCategory.health,isCompleted: true)
-                    ], 
-                    isCompletedTasks: true,
+                  DisplayTasksList(
+                    tasks: taskState.tasks,
                   ),
                   const Gap(20),
                   ElevatedButton(

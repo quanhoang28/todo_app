@@ -3,13 +3,14 @@ import 'package:todo_app/utils/utils.dart';
 import 'package:gap/gap.dart';
 
 class CommonTextField extends StatelessWidget {
-  const CommonTextField({super.key, required this.title, required this.hintText, this.maxLine, this.suffixIcon,this.readOnly=false});
+  const CommonTextField({super.key, required this.title, required this.hintText, this.maxLine, this.suffixIcon,this.readOnly=false, this.controller,});
   final String title;
   final String hintText;
   final int? maxLine;
   final Widget? suffixIcon;
   final bool readOnly;
-  // final TextEditingController controller;
+  final TextEditingController? controller;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,7 +22,7 @@ class CommonTextField extends StatelessWidget {
         ),
         const Gap(10),
         TextField(
-          // controller: controller,
+          controller: controller,
           readOnly: readOnly,
           maxLines: maxLine,
           decoration: InputDecoration(
